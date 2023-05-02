@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+body{
+    display: grid;
+    place-content: center;
+    background: linear-gradient(#8b9da9, #fff6e4);
+    height: 100vh;
+}
+
+.calculator{
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px;
+    grid-template-rows: 50px 50px 50px 50px 50px 50px;
+    /* border: 1px solid rgba(255, 255, 255, 0.4); */
+    box-shadow: 0 0 75px 30px rgba(205, 205, 205, 0.7);
+}
+    
+.calculator > button{
+    /* border: 1px solid rgba(255, 255, 255, 0.7); */
+    border: none; /*i like much more widout borders*/
+    color: rgba(17, 17, 17, 0.4);
+    transition: all 0.4s;
+}
+
+.calculator > button:hover{
+    background-color: rgba(16, 15, 15, 0.4);
+}
+
+.calculator > button.function{
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.4s;
+}
+
+.calculator > button.function:hover{
+    background-color: rgba(16, 15, 15, 0.4);
+}
+
+.zero{
+    grid-area: 6 / 1 / 7 / 3;
+    height: 50px;
+}
+
+.calculator-display{
+    grid-area: 1 / 1 / 2 / 5;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+    padding-top: 25px;
+    padding-right: 5px
+}
