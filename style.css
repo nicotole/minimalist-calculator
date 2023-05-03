@@ -53,6 +53,7 @@ body{
     grid-area: 1 / 1 / 2 / 5;
     color: rgba(255, 255, 255, 0.7);
     text-align: right;
-    padding-top: 25px;
-    padding-right: 5px
+    padding-top: 10px;
+    padding-right: 10px;/*5*/
+    font-size: 35px; /*25*/
 }
