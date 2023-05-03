@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                     lastIsNumber = true;
                 }
             }else{ /*a function key was pressed */
-                if(lastIsNumber){
+                if((lastIsNumber) && (this.innerHTML != '◄')){
                     screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     lastIsNumber = false;
                 }else{
