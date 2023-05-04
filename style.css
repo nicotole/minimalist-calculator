@@ -56,4 +56,5 @@ body{
     padding-top: 10px;
     padding-right: 10px;/*5*/
     font-size: 35px; /*25*/
+    overflow: hidden;
 }

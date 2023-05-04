@@ -35,51 +35,92 @@ document.addEventListener("DOMContentLoaded", (e) =>{
             
 
             if (isNumber(this.innerHTML)){ /* if a number is pressed*/ /* or a dot maybe, TO-DO */
+                lastIsNumber = true;
                 if(screenDOM.innerHTML === '0'){ /* if is the first number pressed*/
                     screenDOM.innerHTML = this.innerHTML;
-                    lastIsNumber = true;
                 }else{/*otherwise its not the first number pressed */
                     screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    lastIsNumber = true;
                 }
             }else{ /*a function key was pressed */
-                if((lastIsNumber) && (this.innerHTML != '◄')){
-                    screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    lastIsNumber = false;
-                }else{
-                    lastIsNumber = false;
-                    screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
-                    screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                }
                 if(this.innerHTML === '='){ 
                     let result = calculate(screenDOM.innerHTML);
                     screenDOM.innerHTML = result;
                 }
-                if(this.innerHTML === '◄'){
-                    /*Delete the last number inputed */
-                    screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                if((this.innerHTML === '◄')){
+                    
+                    if(screenDOM.innerHTML.length === 1){
+                        screenDOM.innerHTML = "0";
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                    }
+                    lastIsNumber = true;
                 }
                 if(this.innerHTML === 'AC'){
                     /* Delete all the inpputed data */
                     screenDOM.innerHTML = '0';
                 }
+
+                if(this.innerHTML === '.'){ 
+                    if(screenDOM.innerHTML === '0'){
+                        screenDOM.innerHTML = '0.';
+                    }else if(lastIsNumber){
+                        screenDOM.innerHTML = screenDOM.innerHTML + '.' 
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
+                    }
+                    lastIsNumber = false;
+                }
+
+                /**Unir todos los de abajo */
+                if(this.innerHTML === '/'){ 
+                    if(lastIsNumber){
+                        screenDOM.innerHTML = screenDOM.innerHTML + '/' 
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
+                    }
+                    lastIsNumber = false;
+                }
+                if(this.innerHTML === '*'){
+                    if(lastIsNumber){
+                        screenDOM.innerHTML = screenDOM.innerHTML + '*'
+                        // lastIsNumber = false;
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
+                    }
+                    lastIsNumber = false;
+                }
+                if(this.innerHTML === '-'){
+                    if(screenDOM.innerHTML === '0'){
+                        screenDOM.innerHTML = '-'
+                    }else if(lastIsNumber){
+                        screenDOM.innerHTML = screenDOM.innerHTML + '-';
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
+                    }
+                    lastIsNumber = false;
+                }
+                if(this.innerHTML === '+'){
+                    if(screenDOM.innerHTML === '0'){
+                        screenDOM.innerHTML = '+'
+                    }else if(lastIsNumber){
+                        screenDOM.innerHTML = screenDOM.innerHTML + '+';
+                    }else{
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
+                    }
+                    lastIsNumber = false;
+                }
+
             }
         });
     }
 
 });
 
-
-
-// if(screenDOM.innerHTML.charAt(screenDOM.length-1).includes(basicMath) && this.innerHTML.includes(basicMath)){
-//     /*if the key pressed is   / - * +     */
-//     console.log(screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1))
-//     screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
-//     screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-//     console.log('skere')
-// }else{
-    
-// }
 
 
 
