@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", (e) =>{
     for (i of btns) {
         i.addEventListener('click', function() {
             
-            
+            console.log(lastIsNumber);
 
-            if (isNumber(this.innerHTML)){ /* if a number is pressed*/ /* or a dot maybe, TO-DO */
+            if (isNumber(this.innerHTML)){ /* if a number is pressed*/ 
                 lastIsNumber = true;
                 if(screenDOM.innerHTML === '0'){ /* if is the first number pressed*/
                     screenDOM.innerHTML = this.innerHTML;
@@ -47,13 +47,16 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                     screenDOM.innerHTML = result;
                 }
                 if((this.innerHTML === '◄')){
-                    
-                    if(screenDOM.innerHTML.length === 1){
-                        screenDOM.innerHTML = "0";
+                    if(screenDOM.innerHTML.length === 1){//i check if its one on screen
+                        screenDOM.innerHTML = '0';   //put cero ifi its one on screen
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)// delete the element
+                        if(isNumber(screenDOM.innerHTML.charAt(screenDOM.innerHTML.length-1))){ //i check the new last element and set the value
+                            lastIsNumber = true;
+                        }else{
+                            lastIsNumber = false
+                        }
                     }
-                    lastIsNumber = true;
                 }
                 if(this.innerHTML === 'AC'){
                     /* Delete all the inpputed data */
@@ -85,7 +88,6 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                 if(this.innerHTML === '*'){
                     if(lastIsNumber){
                         screenDOM.innerHTML = screenDOM.innerHTML + '*'
-                        // lastIsNumber = false;
                     }else{
                         screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
