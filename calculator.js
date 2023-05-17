@@ -16,6 +16,16 @@ document.addEventListener("DOMContentLoaded", (e) =>{
         return !isNaN(char);
     }
 
+    function insertBasicOperator(operator){
+        if(lastIsNumber){
+            screenDOM.innerHTML = screenDOM.innerHTML + operator;
+        }else{
+            screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
+            screenDOM.innerHTML = screenDOM.innerHTML + operator;
+        }
+        lastIsNumber = false;
+    }
+
     let lastIsNumber = true;
     let i = 0;
     
@@ -30,8 +40,7 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                 }
             }else{ /*a function key was pressed */
                 if(this.innerHTML === '='){ 
-                    let result = math.evaluate(screenDOM.innerHTML);
-                    screenDOM.innerHTML = result;
+                    screenDOM.innerHTML = math.evaluate(screenDOM.innerHTML);
                 }
                 if((this.innerHTML === '◄')){
                     if(screenDOM.innerHTML.length === 1){//i check if its one on screen
@@ -64,47 +73,13 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                     let result = math.evaluate(screenDOM.innerHTML + '%');
                     screenDOM.innerHTML = result;
                 }
-                /**Unir todos los de abajo */
-                if(this.innerHTML === '/'){ 
-                    if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '/';
-                    }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
-                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    }
-                    lastIsNumber = false;
+                if(this.innerHTML === '/' 
+                    || this.innerHTML === '*'
+                    || this.innerHTML === '-' 
+                    || this.innerHTML === '+'){ 
+                        insertBasicOperator(this.innerHTML);
                 }
-                if(this.innerHTML === '*'){
-                    if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '*';
-                    }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
-                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    }
-                    lastIsNumber = false;
-                }
-                if(this.innerHTML === '-'){
-                    if(screenDOM.innerHTML === '0'){
-                        screenDOM.innerHTML = '-'
-                    }else if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '-';
-                    }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
-                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    }
-                    lastIsNumber = false;
-                }
-                if(this.innerHTML === '+'){
-                    if(screenDOM.innerHTML === '0'){
-                        screenDOM.innerHTML = '+'
-                    }else if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '+';
-                    }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
-                        screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
-                    }
-                    lastIsNumber = false;
-                }
+
 
             }
         });
