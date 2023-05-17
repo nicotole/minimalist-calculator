@@ -1,15 +1,8 @@
 document.addEventListener("DOMContentLoaded", (e) =>{
-    
     const d = document;
     const screenDOM = d.querySelector('.calculator-display');
     const btns = document.querySelectorAll('button');
-    const basicMath = ['/', '*', '-', '+'];
-
     
-    function calculate(){
-        console.log('calculo');
-    }
-
     function isNumber(char){
         /*This function returns true
         if the supplied string is a number
@@ -23,17 +16,11 @@ document.addEventListener("DOMContentLoaded", (e) =>{
         return !isNaN(char);
     }
 
-    function calculate(mathExpression){
-        //TO-DO
-    }
-
     let lastIsNumber = true;
-
+    let i = 0;
+    
     for (i of btns) {
         i.addEventListener('click', function() {
-            
-            console.log(lastIsNumber);
-
             if (isNumber(this.innerHTML)){ /* if a number is pressed*/ 
                 lastIsNumber = true;
                 if(screenDOM.innerHTML === '0'){ /* if is the first number pressed*/
@@ -43,7 +30,7 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                 }
             }else{ /*a function key was pressed */
                 if(this.innerHTML === '='){ 
-                    let result = calculate(screenDOM.innerHTML);
+                    let result = math.evaluate(screenDOM.innerHTML);
                     screenDOM.innerHTML = result;
                 }
                 if((this.innerHTML === '◄')){
@@ -54,42 +41,44 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                         if(isNumber(screenDOM.innerHTML.charAt(screenDOM.innerHTML.length-1))){ //i check the new last element and set the value
                             lastIsNumber = true;
                         }else{
-                            lastIsNumber = false
+                            lastIsNumber = false;
                         }
                     }
                 }
                 if(this.innerHTML === 'AC'){
-                    /* Delete all the inpputed data */
-                    screenDOM.innerHTML = '0';
+                    screenDOM.innerHTML = '0';/* Delete all the inpputed data */
                 }
 
                 if(this.innerHTML === '.'){ 
                     if(screenDOM.innerHTML === '0'){
                         screenDOM.innerHTML = '0.';
                     }else if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '.' 
+                        screenDOM.innerHTML = screenDOM.innerHTML + '.';
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     }
                     lastIsNumber = false;
                 }
-
+                if(this.innerHTML === '%'){
+                    let result = math.evaluate(screenDOM.innerHTML + '%');
+                    screenDOM.innerHTML = result;
+                }
                 /**Unir todos los de abajo */
                 if(this.innerHTML === '/'){ 
                     if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '/' 
+                        screenDOM.innerHTML = screenDOM.innerHTML + '/';
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     }
                     lastIsNumber = false;
                 }
                 if(this.innerHTML === '*'){
                     if(lastIsNumber){
-                        screenDOM.innerHTML = screenDOM.innerHTML + '*'
+                        screenDOM.innerHTML = screenDOM.innerHTML + '*';
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     }
                     lastIsNumber = false;
@@ -100,7 +89,7 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                     }else if(lastIsNumber){
                         screenDOM.innerHTML = screenDOM.innerHTML + '-';
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     }
                     lastIsNumber = false;
@@ -111,7 +100,7 @@ document.addEventListener("DOMContentLoaded", (e) =>{
                     }else if(lastIsNumber){
                         screenDOM.innerHTML = screenDOM.innerHTML + '+';
                     }else{
-                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1)
+                        screenDOM.innerHTML = screenDOM.innerHTML.slice(0 ,screenDOM.innerHTML.length-1);
                         screenDOM.innerHTML = screenDOM.innerHTML + this.innerHTML;
                     }
                     lastIsNumber = false;
